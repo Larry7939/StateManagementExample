@@ -26,7 +26,13 @@ fun RegisterScreenARoot(
     val email by viewModel.email.collectAsStateWithLifecycle()
     val password by viewModel.password.collectAsStateWithLifecycle()
     val isRegisterEnable by viewModel.isRegisterEnable.collectAsStateWithLifecycle()
-    RegisterScreenA(email, password, isRegisterEnable, {}, {})
+
+    RegisterScreenA(
+        email,
+        password,
+        isRegisterEnable,
+        { viewModel.updateEmail(it) },
+        { viewModel.updatePassword(it) })
 }
 
 
@@ -38,24 +44,40 @@ fun RegisterScreenA(
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit
 ) {
-    val context = LocalContext.current
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        TextField(value = email, onValueChange = { email -> onEmailChanged(email) })
+        EmailInput(email = email, onEmailChanged = { email -> onEmailChanged(email) })
         Spacer(Modifier.height(20.dp))
-        TextField(value = password, onValueChange = { password -> onPasswordChanged(password) })
+        PasswordInput(password, onPasswordChanged = { password -> onPasswordChanged(password) })
         Spacer(Modifier.height(20.dp))
-        Button(
-            modifier = Modifier
-                .height(56.dp)
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp),
-            onClick = { Toast.makeText(context, "", Toast.LENGTH_SHORT).show() },
-            enabled = isRegisterEnable
-        ) {
-            Text("Register")
-        }
+        RegisterButton(isRegisterEnable)
     }
 }
+
+@Composable
+fun EmailInput(email: String, onEmailChanged: (String) -> Unit) {
+    TextField(value = email, onValueChange = { email -> onEmailChanged(email) })
+}
+
+@Composable
+fun PasswordInput(password: String, onPasswordChanged: (String) -> Unit) {
+    TextField(value = password, onValueChange = { password -> onPasswordChanged(password) })
+}
+
+@Composable
+fun RegisterButton(isRegisterEnable: Boolean) {
+    val context = LocalContext.current
+    Button(
+        modifier = Modifier
+            .height(56.dp)
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp),
+        onClick = { Toast.makeText(context, "Register", Toast.LENGTH_SHORT).show() },
+        enabled = isRegisterEnable
+    ) {
+        Text("Register")
+    }
+}
+
 
 @Composable
 @Preview(showBackground = true)
