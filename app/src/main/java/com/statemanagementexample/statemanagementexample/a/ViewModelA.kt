@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,6 +19,14 @@ class ViewModelA @Inject constructor() : ViewModel() {
 
     private val _password = MutableStateFlow("")
     val password = _password.asStateFlow()
+
+    fun updateEmail(email: String) {
+        _email.update { email }
+    }
+
+    fun updatePassword(password: String) {
+        _password.update { password }
+    }
 
     private val isEmailValid = email
         .map { it.isNotEmpty() }
