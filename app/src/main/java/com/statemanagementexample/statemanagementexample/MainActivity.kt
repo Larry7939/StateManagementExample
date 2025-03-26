@@ -11,8 +11,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.statemanagementexample.statemanagementexample.a.RegisterScreenARoot
+import com.statemanagementexample.statemanagementexample.b.RegisterScreenBRoot
+import com.statemanagementexample.statemanagementexample.c.RegisterScreenCRoot
 import com.statemanagementexample.statemanagementexample.ui.theme.StateManagementExampleTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +30,9 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding),
                         contentAlignment = Alignment.Center
                     ) {
-                        RegisterScreenARoot()
+//                        RegisterScreenARoot()
+//                        RegisterScreenBRoot()
+                        RegisterScreenCRoot()
                     }
                 }
             }
