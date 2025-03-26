@@ -19,14 +19,14 @@ class ViewModelA @Inject constructor() : ViewModel() {
     private val _password = MutableStateFlow("")
     val password = _password.asStateFlow()
 
-    val isEmailValid = email
+    private val isEmailValid = email
         .map { it.isNotEmpty() }
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),
             false
         )
-    val isPasswordValid = password
+    private val isPasswordValid = password
         .map { it.isNotEmpty() }
         .stateIn(
             viewModelScope,
