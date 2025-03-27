@@ -28,11 +28,12 @@ fun RegisterScreenARoot(
     val isRegisterEnable by viewModel.isRegisterEnable.collectAsStateWithLifecycle()
 
     RegisterScreenA(
-        email,
-        password,
-        isRegisterEnable,
-        { viewModel.updateEmail(it) },
-        { viewModel.updatePassword(it) })
+        email = email,
+        password = password,
+        isRegisterEnable = isRegisterEnable,
+        onEmailChanged = viewModel::updateEmail,
+        onPasswordChanged = viewModel::updatePassword
+    )
 }
 
 
@@ -45,9 +46,9 @@ fun RegisterScreenA(
     onPasswordChanged: (String) -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        EmailInput(email = email, onEmailChanged = { email -> onEmailChanged(email) })
+        EmailInput(email = email, onEmailChanged = onEmailChanged)
         Spacer(Modifier.height(20.dp))
-        PasswordInput(password, onPasswordChanged = { password -> onPasswordChanged(password) })
+        PasswordInput(password, onPasswordChanged = onPasswordChanged)
         Spacer(Modifier.height(20.dp))
         RegisterButton(isRegisterEnable)
     }
@@ -55,12 +56,12 @@ fun RegisterScreenA(
 
 @Composable
 fun EmailInput(email: String, onEmailChanged: (String) -> Unit) {
-    TextField(value = email, onValueChange = { email -> onEmailChanged(email) })
+    TextField(value = email, onValueChange = onEmailChanged)
 }
 
 @Composable
 fun PasswordInput(password: String, onPasswordChanged: (String) -> Unit) {
-    TextField(value = password, onValueChange = { password -> onPasswordChanged(password) })
+    TextField(value = password, onValueChange = onPasswordChanged)
 }
 
 @Composable

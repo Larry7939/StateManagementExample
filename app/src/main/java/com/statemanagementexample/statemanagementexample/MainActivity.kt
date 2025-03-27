@@ -31,8 +31,8 @@ class MainActivity : ComponentActivity() {
                         contentAlignment = Alignment.Center
                     ) {
 //                        RegisterScreenARoot()
-//                        RegisterScreenBRoot()
-                        RegisterScreenCRoot()
+                        RegisterScreenBRoot()
+//                        RegisterScreenCRoot()
                     }
                 }
             }

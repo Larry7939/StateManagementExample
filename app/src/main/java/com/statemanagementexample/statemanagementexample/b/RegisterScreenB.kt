@@ -25,9 +25,10 @@ fun RegisterScreenBRoot(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     RegisterScreenB(
-        state,
-        { viewModel.updateEmail(it) },
-        { viewModel.updatePassword(it) })
+        state = state,
+        onEmailChanged = viewModel::updateEmail,
+        onPasswordChanged = viewModel::updatePassword
+    )
 }
 
 
@@ -50,12 +51,12 @@ fun RegisterScreenB(
 
 @Composable
 fun EmailInput(email: String, onEmailChanged: (String) -> Unit) {
-    TextField(value = email, onValueChange = { email -> onEmailChanged(email) })
+    TextField(value = email, onValueChange = onEmailChanged)
 }
 
 @Composable
 fun PasswordInput(password: String, onPasswordChanged: (String) -> Unit) {
-    TextField(value = password, onValueChange = { password -> onPasswordChanged(password) })
+    TextField(value = password, onValueChange = onPasswordChanged)
 }
 
 @Composable
